@@ -24,5 +24,8 @@ def sensordata(request,z):
     x=data()
     x.moisture = txt[0]
     x.temperature = txt[1]
+    x.phlevel = txt [2]
+    x.pressure = txt [3]
+    x.humidity = txt [4]
     x.save()
     return  render(request, "myapp/index.html")

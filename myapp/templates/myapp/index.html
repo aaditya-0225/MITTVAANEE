@@ -14,7 +14,7 @@
 <body background="{% static 'myapp/mittvaanehome.png' %}" style="background-repeat: no-repeat; margin-block-end: auto; align-self: center; ">
     <nav class="navbar navbar-dark bg-dark fixed-top" style="margin-left: 30px; margin-right: 30px; margin-top: 10px; border-radius: 10px;">
         <div class="container-fluid" >
-          <a class="navbar-brand" href="">MITTVAANEE</a>
+          <a class="navbar-brand" href="{% url 'home' %}">MITTVAANEE</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -61,54 +61,14 @@
 
       <div style="margin-top: 300px; text-align: center; padding-bottom: 30px;">
 
-        <h1 style="font-family: Georgia ,'Times New Roman', Times, serif;"> Extensive Analysis at your ease Anywhere/Anytime </h1>
+        <h1 style="font-family: Georgia ,'Times New Roman', Times, serif;"> Extensive analysis at your ease </h1>
 
-        <div style="margin-left: 350px; margin-right: 350px; border-radius: 15px; background-color: cadetblue;">
-          <h3 style="color: aliceblue ; font-size: medium; padding: 15px;">Your Data anytime on the App </h3> 
-          <div class="d-inline-flex p-2">
-
-            <div class="accordion" id="accordionExample" style="margin-bottom: 30px;">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Accordion Item #1
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Accordion Item #2
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Accordion Item #3
-                </button>
-              </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is us</strong>
-                </div>
-              </div>
-            </div>
-          </div></div>
-        </div>
-
+          <p style="align-items: center;  margin-left: 450px; margin-right: 450px; border-radius: 5px; margin-top: 20px;">Your data anytime on the App </p> 
       </div>
-      
-
+          
+    <div style="display: flex; justify-content: center;">
+      <img src="{% static 'myapp/demoapp.png' %}" alt="" style=" height: 500px; width: 700px; border-radius: 10px;">
+    </div>
 
 </body>
 </html>
