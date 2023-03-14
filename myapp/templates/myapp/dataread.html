@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+    display: grid;
+    height: 100%;
+    text-align: center;
+    place-items: center;
+    background: #dde6f0;
+}
+
+.circular {
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+
+.circular .inner,
+.circular .outer,
+.circular .circle {
+    position: absolute;
+    z-index: 6;
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.circular .inner {
+    top: 50%;
+    left: 50%;
+    height: 80px;
+    width: 80px;
+    margin: -40px 0 0 -40px;
+    background-color: #dde6f0;
+    border-radius: 100%;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.circular .circle {
+    z-index: 1;
+    box-shadow: none;
+}
+
+.circular .numb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    font-size: 18px;
+    font-weight: 500;
+    color: #4158d0;
+}
+
+.circular .bar {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    border-radius: 100%;
+    clip: rect(0px, 100px, 100px, 50px);
+}
+
+.circle .bar .progress {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    clip: rect(0px, 50px, 100px, 0px);
+}
+
+.circle .bar .progress,
+.dot span {
+    background: #4158d0;
+}
+
+.circle .left .progress {
+    z-index: 1;
+    animation: left 4s linear both;
+}
+
+@keyframes left {
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+.circle .right {
+    z-index: 3;
+    transform: rotate(180deg);
+}
+
+.circle .right .progress {
+    animation: right 4s linear both;
+    animation-delay: 4s;
+}
+
+@keyframes right {
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+.circle .dot {
+    z-index: 2;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50%;
+    height: 10px;
+    margin-top: -5px;
+    animation: dot 8s linear both;
+    transform-origin: 0% 50%;
+}
+
+.circle .dot span {
+    position: absolute;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+@keyframes dot {
+    0% {
+        transform: rotate(-90deg);
+    }
+
+    50% {
+        transform: rotate(90deg);
+        z-index: 4;
+    }
+
+    100% {
+        transform: rotate(270deg);
+        z-index: 4;
+    }
+}
+
+    </style>
+    <script>
+        const numb = document.querySelector(".numb");
+let counter = 0;
+setInterval(()=>{
+if(counter == 60){
+clearInterval();
+}else{
+counter+=1;
+numb.textContent = counter + "%";
+}
+}, 80);
+    </script>
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type='text/javascript'>
+    google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Temperature', 80],
+          ['Humidity', 55],
+          ['Pressure', 68]
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          redFrom: 90, redTo: 100,
+          yellowFrom:75, yellowTo: 90,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div1'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 13000);
+        setInterval(function() {
+          data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 5000);
+        setInterval(function() {
+          data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+          chart.draw(data, options);
+        }, 26000);
+      }
+     google.charts.load('current', {
+       'packages': ['geochart'],
+       // Note: Because markers require geocoding, you'll need a mapsApiKey.
+       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+       'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+     });
+     google.charts.setOnLoadCallback(drawMarkersMap);
+
+      function drawMarkersMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['City',   'Trees', 'Area'],
+        ['Rome',      2761477,    1285.31],
+        ['Milan',     1324110,    181.76],
+        ['Naples',    959574,     117.27],
+        ['Turin',     907563,     130.17],
+        ['Palermo',   655875,     158.9],
+        ['Genoa',     607906,     243.60],
+        ['Bologna',   380181,     140.7],
+        ['Florence',  371282,     102.41],
+        ['Fiumicino', 67370,      213.44],
+        ['Anzio',     52192,      43.43],
+        ['Ciampino',  38262,      11]
+      ]);
+
+      var options = {
+        region: 'IT',
+        displayMode: 'markers',
+        colorAxis: {colors: ['green', 'blue']}
+      };
+
+      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    };
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div>
+    <nav class="navbar navbar-dark bg-dark fixed-top" style="margin-left: 30px; margin-right: 30px; margin-top: 10px; border-radius: 10px;">
+        <div class="container-fluid" >
+          <a class="navbar-brand" href="">MITTVAANEE</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MITTVAANEE</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'data' %}">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'predict' %}">Predict</a>
+                  </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Contact Us
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Email</a></li>
+                    <li><a class="dropdown-item" href="#">Mobile</a></li>
+                   
+                  </ul>
+                </li>
+              </ul>
+              
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+     
+
+      <div id="chart_div" style="width: 500px; height: 500px; text-align: center; padding-left: 100px;padding-right: 100px; margin-top: 100px;"></div>
+      <div id="chart_div1" style="width: 500px; height: 500px; text-align: center;padding-left: 100px; padding-right: 100px;"></div>
+      <div class="circular">
+        <div class="inner">
+        </div>
+        <div class="outer">
+        </div>
+        <div class="numb">
+            100%</div>
+        <div class="circle">
+            <div class="dot">
+                <span></span>
+            </div>
+            <div class="bar left">
+                <div class="progress">
+                </div>
+            </div>
+            <div class="bar right">
+                <div class="progress">
+                </div>
+            </div>
+        </div>
+    </div>
+      <div style="margin-top: 200px;">
+
+        <p>This the data from the backend</p>
+
+             {{x.moisture}}
+             {{x.temperature}}
+
+      </div>
+
+             
+</body>
+</html>
